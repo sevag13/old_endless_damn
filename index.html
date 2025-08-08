@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,7 @@
             margin: 0 auto;
             font-size: 24px;
             line-height: 2;
+            padding-bottom: 40px; /* dont know */
         }
         .damn-line {
             margin: 30px 0;
@@ -27,9 +28,34 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #777;
+            opacity: 0.5; /* yeah */
+            z-index: 1000; /* high z-index (i think thats what its called) to ensure its 🔛🔝 */
+            background-color: rgba(245, 245, 245, 0.5);
+            padding: 5px;
+            border-radius: 3px;
+            pointer-events: none; /* makes it so its not interfierable */
+        } 
+        .watermark a {
+            color: #555;
+            text-decoration: none;
+            pointer-events: auto; /* clicker */
+        }
+        .watermark a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+    <div class="watermark">
+        made by <a href="https://github.com/sevag13" target="_blank">sevag13 (on github)</a>
+    </div>
+
     <div class="content" id="content">
         <div class="damn-line">Damn is 😂🎉</div>
         <div class="damn-line">Damn is 😂🎉</div>
@@ -52,15 +78,12 @@
         <div class="damn-line">Damn is 😂🎉</div>
         <div class="damn-line">Damn is 😂🎉</div>
     </div>
-    <div class="watermark">
-        made by <a href="https://github.com/sevag13" target="_blank">sevag13 (on github)</a>
-    </div>
 
     <script>
-        // tracks how much lines
-        let lineCount = 20; // start of lines (adjustable of course)
+        // keeps track of lines
+        let lineCount = 20; // start with 20 whole lines
         
-        // functions for adding this
+        // functions to add more content
         function addMoreContent() {
             const content = document.getElementById('content');
             const newLine = document.createElement('div');
@@ -70,22 +93,22 @@
             lineCount++;
         }
         
-        // litsens if the person scrolling is near the end then repeat process
+        // finds when user is near rock bottom
         window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
             const windowHeight = window.innerHeight;
             const bodyHeight = document.body.offsetHeight;
             
-            // if were withing like 300 pixels add same thing
+            // if within 300 pixels of the page below then add more content
             if (bodyHeight - (scrollPosition + windowHeight) < 300) {
-                // just adds below lines (5 of course)
+                // add 5 more lines
                 for (let i = 0; i < 5; i++) {
                     addMoreContent();
                 }
             }
         });
         
-        // add the lines so the site is scrollable
+        // initial lines so it does that "Damn is 😂🎉"
         for (let i = 0; i < 30; i++) {
             addMoreContent();
         }
